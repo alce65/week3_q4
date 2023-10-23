@@ -19,7 +19,7 @@ function main() {
 
   renderHeader(appElement);
   renderMenu(appElement, menuOptions);
-  appElement.innerHTML += 'Home';
+  appElement.innerHTML += 'Products';
   renderFooter(appElement);
 }
 
