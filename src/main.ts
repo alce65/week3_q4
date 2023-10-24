@@ -2,6 +2,7 @@ import { renderFooter } from './footer';
 import { renderHeader } from './header';
 import './main.scss';
 import { renderMenu } from './menu';
+import { router } from './router';
 import { MenuOption } from './types';
 
 function main() {
@@ -11,6 +12,7 @@ function main() {
     { label: 'Home', path: '/' },
     { label: 'Productos', path: '/products.html' },
     { label: 'Clientes', path: '/clients.html' },
+    { label: 'GoT', path: '/got.html' },
     { label: 'Acerca de', path: '/about.html' },
   ];
 
@@ -19,7 +21,7 @@ function main() {
 
   renderHeader(appElement);
   renderMenu(appElement, menuOptions);
-  appElement.innerHTML += 'Home';
+  router(appElement);
   renderFooter(appElement);
 }
 
