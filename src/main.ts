@@ -1,8 +1,7 @@
-import { renderFooter } from './footer';
-import { renderHeader } from './header';
+import { Footer } from './components/footer';
+import { Header } from './components/header';
 import './main.scss';
-import { renderMenu } from './menu';
-import { router } from './router';
+import { Router } from './components/router';
 import { MenuOption } from './types';
 
 function main() {
@@ -19,10 +18,13 @@ function main() {
   const appElement = document.querySelector<HTMLDivElement>('#app');
   if (appElement === null) return;
 
-  renderHeader(appElement);
-  renderMenu(appElement, menuOptions);
-  router(appElement);
-  renderFooter(appElement);
+  const components = [
+    new Header('#app', menuOptions),
+    new Router('#app'),
+    new Footer('#app'),
+  ];
+
+  console.log(components);
 }
 
 main();
