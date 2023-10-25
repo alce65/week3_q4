@@ -14,7 +14,11 @@ export class Router extends Component {
   render() {
     super.render();
     if (this.path === '/') {
-      const elements = [new Greetings('main')];
+      const elements = [
+        new Greetings('main'),
+        // Temp new Greetings('main'),
+        // new Greetings('main'),
+      ];
       console.log('Router', elements);
     }
   }

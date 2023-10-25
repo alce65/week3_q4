@@ -2,10 +2,10 @@
 
 export default {
   preset: 'ts-jest',
-  // DOM testEnvironment: 'jsdom',
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['dist'],
   resolver: 'jest-ts-webcompat-resolver',
-  // DOM moduleNameMapper: {
-  //   '\\.(css|scss)$': 'identity-obj-proxy',
-  // },
+  moduleNameMapper: {
+    '\\.(css|scss)$': 'identity-obj-proxy',
+  },
 };
