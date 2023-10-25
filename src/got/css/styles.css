@@ -65,7 +65,7 @@ body {
   color: #fff;
   width: 80%;
 }
-.comunications {
+.communications {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -79,16 +79,19 @@ body {
   right: 100vw;
   left: -100vw;
 }
-.comunications.on {
+.communications.on {
   right: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 1);
 }
-.comunications__picture {
+.communications__picture {
   width: 70px;
   position: absolute;
   right: 10px;
   bottom: 10px;
+}
+.card-img-top {
+  transform: rotate(180deg);
 }
 .emoji {
   font-style: normal;
