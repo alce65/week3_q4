@@ -1,7 +1,13 @@
 import { Task } from '../model/task';
 
-export const repo = () => {
-  const data: Task[] = [
+const storeName = 'Tasks';
+
+export const setTasks = (tasks: Task[]) => {
+  localStorage.setItem(storeName, JSON.stringify(tasks));
+};
+
+export const getTasks = (): Task[] => {
+  const initialTasks: Task[] = [
     {
       id: crypto.randomUUID(),
       name: 'Desayunar',
@@ -21,5 +27,17 @@ export const repo = () => {
       isCompleted: false,
     },
   ];
-  return data;
+
+  const tasksText = localStorage.getItem(storeName);
+  if (!tasksText) {
+    setTasks(initialTasks);
+    return initialTasks;
+  }
+
+  const tasks = JSON.parse(tasksText);
+  return tasks;
+};
+
+export const removeTasks = () => {
+  localStorage.removeItem(storeName);
 };

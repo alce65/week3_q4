@@ -1,5 +1,5 @@
 import { Component } from '../../components/component';
-import { repo } from '../data/repo';
+import { getTasks, setTasks } from '../data/repo';
 import { Task } from '../model/task';
 import { Add } from './add';
 import { Card } from './card';
@@ -14,26 +14,26 @@ export class List extends Component {
   }
 
   loadTasks() {
-    this.tasks = repo();
+    this.tasks = getTasks();
   }
 
   addTask(task: Task) {
     this.tasks = [...this.tasks, task];
-    console.log(this.tasks);
-    this.clear();
-    this.render();
+    this.saveTasks();
   }
 
   updateTask(task: Task) {
     this.tasks = this.tasks.map((item) => (item.id === task.id ? task : item));
-    console.log(this.tasks);
-    this.clear();
-    this.render();
+    this.saveTasks();
   }
 
   deleteTask(task: Task) {
     this.tasks = this.tasks.filter((item) => item.id !== task.id);
-    console.log(this.tasks);
+    this.saveTasks();
+  }
+
+  saveTasks() {
+    setTasks(this.tasks);
     this.clear();
     this.render();
   }

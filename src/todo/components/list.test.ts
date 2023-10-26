@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { List } from './list';
-import { repo } from '../data/repo';
+import { getTasks } from '../data/repo';
 
 jest.mock('../data/repo');
 
 describe('Given List component', () => {
-  (repo as jest.Mock).mockReturnValue([{}]);
+  (getTasks as jest.Mock).mockReturnValue([{}]);
   describe('When we instantiate', () => {
     document.body.innerHTML = '<div></div>';
     const list = new List('div');
