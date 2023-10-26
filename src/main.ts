@@ -12,6 +12,7 @@ function main() {
     { label: 'Productos', path: '/products.html' },
     { label: 'Clientes', path: '/clients.html' },
     { label: 'GoT', path: '/got.html' },
+    { label: 'ToDo', path: '/todo.html' },
     { label: 'Acerca de', path: '/about.html' },
   ];
 
