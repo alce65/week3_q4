@@ -4,13 +4,13 @@ import { Task } from '../model/task';
 
 export class Card extends Component {
   task: Task;
-  deleteTask: (_task: Task) => void;
-  updateTask: (_task: Task) => void;
+  deleteTask: (_id: Task['id']) => void;
+  updateTask: (_id: Task['id'], _task: Task) => void;
   constructor(
     selector: string,
     task: Task,
-    deleteTask: (_task: Task) => void,
-    updateTask: (_task: Task) => void
+    deleteTask: (_id: Task['id']) => void,
+    updateTask: (_id: Task['id'], _task: Task) => void
   ) {
     super(selector);
     this.task = { ...task };
@@ -25,12 +25,12 @@ export class Card extends Component {
   }
 
   handleDelete() {
-    this.deleteTask(this.task);
+    this.deleteTask(this.task.id);
   }
 
   handleCheck() {
     this.task.isCompleted = !this.task.isCompleted;
-    this.updateTask(this.task);
+    this.updateTask(this.task.id, this.task);
   }
 
   render() {

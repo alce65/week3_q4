@@ -2,8 +2,11 @@ import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { List } from './list';
 import { getTasks } from '../data/repo';
+import { ApiRepo } from '../data/api.repo';
 
 jest.mock('../data/repo');
+
+ApiRepo.prototype.getTasks = jest.fn();
 
 describe('Given List component', () => {
   (getTasks as jest.Mock).mockReturnValue([{}]);

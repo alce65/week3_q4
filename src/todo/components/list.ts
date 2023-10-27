@@ -1,14 +1,16 @@
 import { Component } from '../../components/component';
-import { getTasks, createTask } from '../data/api.repo';
-import { setTasks } from '../data/repo';
+import { ApiRepo } from '../data/api.repo';
 import { Task } from '../model/task';
 import { Add } from './add';
 import { Card } from './card';
 import './list.scss';
+
 export class List extends Component {
   tasks: Task[];
+  repo: ApiRepo;
   constructor(selector: string) {
     super(selector);
+    this.repo = new ApiRepo();
     this.tasks = [];
     this.loadTasks();
     console.log('Fist Load');
@@ -17,37 +19,56 @@ export class List extends Component {
   }
 
   async loadTasks() {
-    this.tasks = await getTasks();
-    console.log('Load from API');
-    console.log(this.tasks);
-    this.clear();
-    this.render();
+    try {
+      this.tasks = await this.repo.getTasks();
+      console.log('Load from API');
+      console.log(this.tasks);
+      this.clear();
+      this.render();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   }
 
   async addTask(task: Partial<Task>) {
-    // Asíncrona -> API
-    const newTask = await createTask(task);
-    // Síncrono -> Vista
-    this.tasks = [...this.tasks, newTask];
-
-    this.clear();
-    this.render();
+    try {
+      // Asíncrona -> API
+      const newTask = await this.repo.createTask(task);
+      // Síncrono -> Vista
+      this.tasks = [...this.tasks, newTask];
+      this.clear();
+      this.render();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   }
 
-  updateTask(task: Task) {
-    this.tasks = this.tasks.map((item) => (item.id === task.id ? task : item));
-    this.saveTasks();
+  async updateTask(id: Task['id'], task: Partial<Task>) {
+    try {
+      // Asíncrona -> API
+      const updatedTask = await this.repo.updateTask(id, task);
+      // Síncrono -> Vista
+      this.tasks = this.tasks.map((item) =>
+        item.id === updatedTask.id ? updatedTask : item
+      );
+      this.clear();
+      this.render();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   }
 
-  deleteTask(task: Task) {
-    this.tasks = this.tasks.filter((item) => item.id !== task.id);
-    this.saveTasks();
-  }
-
-  saveTasks() {
-    setTasks(this.tasks);
-    this.clear();
-    this.render();
+  async deleteTask(id: Task['id']) {
+    try {
+      // Asíncrona -> API
+      await this.repo.deleteTask(id);
+      // Síncrono -> Vista
+      this.tasks = this.tasks.filter((item) => item.id !== id);
+      this.clear();
+      this.render();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   }
 
   render() {
