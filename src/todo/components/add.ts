@@ -1,8 +1,8 @@
 import { Component } from '../../components/component';
 import { Task } from '../model/task';
 export class Add extends Component {
-  addTask: (_task: Task) => void;
-  constructor(selector: string, addTask: (_task: Task) => void) {
+  addTask: (_task: Partial<Task>) => void;
+  constructor(selector: string, addTask: (_task: Partial<Task>) => void) {
     super(selector);
     this.addTask = addTask;
     this.template = this.createTemplate();
@@ -13,8 +13,7 @@ export class Add extends Component {
     const form = this.element as HTMLFormElement;
     event.preventDefault();
 
-    const newTask: Task = {
-      id: crypto.randomUUID(),
+    const newTask: Partial<Task> = {
       isCompleted: false,
       name: (form.elements.namedItem('title') as HTMLInputElement).value,
       owner: (form.elements.namedItem('owner') as HTMLInputElement).value,

@@ -1,5 +1,6 @@
 import { Component } from '../../components/component';
-import { getTasks, setTasks } from '../data/repo';
+import { getTasks, createTask } from '../data/api.repo';
+import { setTasks } from '../data/repo';
 import { Task } from '../model/task';
 import { Add } from './add';
 import { Card } from './card';
@@ -10,16 +11,27 @@ export class List extends Component {
     super(selector);
     this.tasks = [];
     this.loadTasks();
+    console.log('Fist Load');
+    console.log(this.tasks);
     this.render();
   }
 
-  loadTasks() {
-    this.tasks = getTasks();
+  async loadTasks() {
+    this.tasks = await getTasks();
+    console.log('Load from API');
+    console.log(this.tasks);
+    this.clear();
+    this.render();
   }
 
-  addTask(task: Task) {
-    this.tasks = [...this.tasks, task];
-    this.saveTasks();
+  async addTask(task: Partial<Task>) {
+    // Asíncrona -> API
+    const newTask = await createTask(task);
+    // Síncrono -> Vista
+    this.tasks = [...this.tasks, newTask];
+
+    this.clear();
+    this.render();
   }
 
   updateTask(task: Task) {
