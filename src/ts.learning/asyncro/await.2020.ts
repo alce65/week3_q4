@@ -20,15 +20,13 @@ const makeAsyncPromise2 = (time: number): Promise<string> => {
   });
 };
 
-// IIFE
+try {
+  const data = await makeAsyncPromise2(1000);
+  console.log(data);
+} catch (error) {
+  console.log((error as Error).message);
+}
 
-(async () => {
-  try {
-    const data = await makeAsyncPromise2(1000);
-    console.log(data);
-  } catch (error) {
-    console.log((error as Error).message);
-  }
+console.log('Fin del makeAsync');
 
-  console.log('Fin del makeAsync');
-})();
+export {};
