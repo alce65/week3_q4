@@ -9,11 +9,16 @@ export class List extends Component {
     this.render();
   }
 
-  manageComponent() {}
+  refresh() {
+    this.clear();
+    this.render();
+  }
 
   render() {
     super.render();
-    const elements = repo().map((item) => new Card('ul', item as AnyCharacter));
+    const elements = repo().map(
+      (item) => new Card('ul', item as AnyCharacter, this.refresh.bind(this))
+    );
     console.log(elements);
   }
 

@@ -42,8 +42,10 @@ function makEmoji(category: Category) {
 
 export class Card extends Component {
   character: AnyCharacter;
-  constructor(selector: string, character: AnyCharacter) {
+  refresh: () => void;
+  constructor(selector: string, character: AnyCharacter, refresh: () => void) {
     super(selector);
+    this.refresh = refresh;
     this.character = character;
     this.manageComponent();
   }
@@ -67,11 +69,12 @@ export class Card extends Component {
     // Alt this.character.isAlive = false!;
     this.character.dead();
     console.log(this.character);
-    this.clear();
-    this.manageComponent();
-    this.element
-      .querySelector('.card-img-top')
-      ?.classList.add('.character__card_down');
+    // Temp this.clear();
+    // this.manageComponent();
+    // this.element
+    //   .querySelector('.card-img-top')
+    //   ?.classList.add('.character__card_down');
+    this.refresh();
   }
 
   render() {

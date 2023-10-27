@@ -1,4 +1,5 @@
 import { Component } from './component';
+import './greetings.scss';
 
 export class Greetings extends Component {
   message: string;
@@ -7,13 +8,8 @@ export class Greetings extends Component {
     super(selector);
     this.counter = 0;
     this.message = '';
-    this.manageComponent();
-    console.dir(this);
-  }
-
-  manageComponent() {
-    this.template = this.createTemplate();
     this.render();
+    console.dir(this);
   }
 
   handleButton() {
@@ -23,10 +19,11 @@ export class Greetings extends Component {
     console.log('Handle Button');
     console.dir(this);
     this.clear();
-    this.manageComponent();
+    this.render();
   }
 
   render() {
+    this.template = this.createTemplate();
     super.render();
     const buttonElement = this.element.querySelector('button');
     buttonElement?.addEventListener('click', this.handleButton.bind(this));
