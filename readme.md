@@ -38,7 +38,7 @@ npm i -D eslint-config-prettier
 ```shell
 
 npm i -D jest ts-jest @types/jest @types/node jest-ts-webcompat-resolver
-
+npm i -D identity-obj-proxy
 ```
 
 jest-DOM environment

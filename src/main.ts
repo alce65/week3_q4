@@ -1,8 +1,7 @@
-import { renderFooter } from './footer';
-import { renderHeader } from './header';
+import { Footer } from './components/footer';
+import { Header } from './components/header';
 import './main.scss';
-import { renderMenu } from './menu';
-import { router } from './router';
+import { Router } from './components/router';
 import { MenuOption } from './types';
 
 function main() {
@@ -13,16 +12,20 @@ function main() {
     { label: 'Productos', path: '/products.html' },
     { label: 'Clientes', path: '/clients.html' },
     { label: 'GoT', path: '/got.html' },
+    { label: 'ToDo', path: '/todo.html' },
     { label: 'Acerca de', path: '/about.html' },
   ];
 
   const appElement = document.querySelector<HTMLDivElement>('#app');
   if (appElement === null) return;
 
-  renderHeader(appElement);
-  renderMenu(appElement, menuOptions);
-  router(appElement);
-  renderFooter(appElement);
+  const components = [
+    new Header('#app', menuOptions),
+    new Router('#app'),
+    new Footer('#app'),
+  ];
+
+  console.log(components);
 }
 
 main();
